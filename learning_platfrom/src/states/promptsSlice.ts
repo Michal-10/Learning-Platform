@@ -1,60 +1,7 @@
-// import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-// import type { Prompt } from "../models/Prompt";
-
-// interface PromptsState {
-//   prompts: Prompt[];
-//   loading: boolean;
-//   error: string | null;
-// }
-
-// const initialState: PromptsState = {
-//   prompts: [],
-//   loading: false,
-//   error: null,
-// };
-
-// export const fetchPrompts = createAsyncThunk(
-//   "prompts/fetchPrompts",
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       const res = await fetch("/api/prompts");
-//       if (!res.ok) throw new Error("Failed to fetch prompts");
-//       return (await res.json()) as Prompt[];
-//     } catch (err) {
-//       return rejectWithValue("Failed to load prompts");
-//     }
-//   }
-// );
-
-// const promptsSlice = createSlice({
-//   name: "prompts",
-//   initialState,
-//   reducers: {},
-//   extraReducers: (builder) => {
-//     builder
-//       .addCase(fetchPrompts.pending, (state) => {
-//         state.loading = true;
-//         state.error = null;
-//       })
-//       .addCase(fetchPrompts.fulfilled, (state, action) => {
-//         state.loading = false;
-//         state.prompts = action.payload;
-//       })
-//       .addCase(fetchPrompts.rejected, (state, action) => {
-//         state.loading = false;
-//         state.error = action.payload as string;
-//       });
-//   },
-// });
-
-// export default promptsSlice.reducer;
-
-
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import type { Prompt } from '../models/Prompt';
-import { useSelector } from 'react-redux';
 import type { RootState } from './store';
 
 interface PromptState {
@@ -118,6 +65,27 @@ export const fetchPromptHistory = createAsyncThunk(
                     Authorization: `Bearer ${token}`
                 }
             });
+            console.log("res.data");
+            console.log(res.data);
+
+            console.log("res.data");
+
+            return res.data;
+        } catch (err: any) {
+            return thunkAPI.rejectWithValue(err.response.data);
+        }
+    }
+);
+
+export const getAllPrompts = createAsyncThunk(
+    'prompt/fetchPrompts',
+    async (_, thunkAPI) => {
+        try {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/admin/dashboard`);
+            console.log("res.data");
+            console.log(res.data);
+            console.log("res.data");
+
             return res.data;
         } catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);
@@ -154,7 +122,20 @@ const promptSlice = createSlice({
             .addCase(fetchPromptHistory.rejected, (state, action: any) => {
                 state.loading = false;
                 state.error = action.payload;
-            });
+            })
+            .addCase(getAllPrompts.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getAllPrompts.fulfilled, (state, action) => {
+                state.loading = false;
+                state.prompts = action.payload;
+            })
+            .addCase(getAllPrompts.rejected, (state, action: any) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+
     },
 });
 

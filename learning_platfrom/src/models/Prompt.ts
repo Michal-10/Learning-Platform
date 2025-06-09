@@ -1,8 +1,8 @@
 export interface Prompt {
     id: string;
     userId: string;
-    categoryId: string;
-    subCategoryId: string;
+    category_id: {name:string};
+    sub_category_id: {name:string};
     prompt: string;
     response: string;
     createdAt: string;

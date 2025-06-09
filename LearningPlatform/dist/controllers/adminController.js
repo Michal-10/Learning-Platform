@@ -17,8 +17,8 @@ const Prompt_1 = __importDefault(require("../models/Prompt"));
 const getAllPromptsWithNames = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const prompts = yield Prompt_1.default.find()
-            .populate('categoryId', 'name') // שליפת שם הקטגוריה
-            .populate('subCategoryId', 'name'); // שליפת שם תת־הקטגוריה
+            .populate('category_id', 'name') // שליפת שם הקטגוריה
+            .populate('sub_category_id', 'name'); // שליפת שם תת־הקטגוריה
         res.status(200).json(prompts);
     }
     catch (error) {

@@ -14,7 +14,7 @@ export async function getAIResponse(prompt: string): Promise<string> {
   
   
   const response = await openai.chat.completions.create({
-    model: 'gpt-4-turbo', // או 'gpt-4' אם יש לך גישה
+    model: 'gpt-4-turbo', 
     messages: [
       {
         role: 'user',

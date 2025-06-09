@@ -38,13 +38,10 @@ import {
 
 const router = express.Router();
 
-// יצירת תת־קטגוריה
 router.post('/', createSubCategory);
 
-// שליפת כל תתי־הקטגוריות
 router.get('/', getAllSubCategories);
 
-// שליפת תתי־קטגוריות לפי מזהה קטגוריה
 router.get('/category/:categoryId', getSubCategoriesByCategory);
 
 export default router;

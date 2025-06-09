@@ -1,19 +1,27 @@
-import { Outlet } from 'react-router';
-import Header from './components/Header';
-import Footer from './components/Footer';
-
-
+import { Outlet } from "react-router"
+import { Box, Container } from "@mui/material"
+import Header from "./components/Header"
+import Footer from "./components/Footer"
 
 const Layout = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-white text-black dark:bg-gray-900 dark:text-white">
+    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <Header />
-      <main className="flex-grow p-4">
-        <Outlet/>
-      </main>
+      <Container
+        component="main"
+        maxWidth="lg"
+        sx={{
+          flexGrow: 1,
+          py: 3,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Outlet />
+      </Container>
       <Footer />
-    </div>
-  );
-};
+    </Box>
+  )
+}
 
-export default Layout;
+export default Layout

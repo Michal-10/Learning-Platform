@@ -1,27 +1,3 @@
-// import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-// import axios from '../../utils/axios';
-
-// export const fetchCategories = async () => {
-//   const response = await axios.get('/categories');
-//   return response.data;
-// };
-
-
-// export const loadCategories = createAsyncThunk('categories/fetch', fetchCategories);
-
-// const categoriesSlice = createSlice({
-//   name: 'categories',
-//   initialState: [],
-//   reducers: {},
-//   extraReducers: (builder) => {
-//     builder.addCase(loadCategories.fulfilled, (state, action) => {
-//       return action.payload;
-//     });
-//   },
-// });
-
-// export default categoriesSlice.reducer;
-
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';

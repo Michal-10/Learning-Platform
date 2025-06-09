@@ -45,8 +45,6 @@ export async function createPrompt(req: Request, res: Response) {
     }
 
     const aiResponse = await getAIResponse(prompt);
-    console.log("aiResponse");
-    console.log(aiResponse);
 
     const newPrompt = new Prompt({
       user_id: user.id,
@@ -65,7 +63,7 @@ export async function createPrompt(req: Request, res: Response) {
 }
 
 export async function getUserPrompts(req: Request, res: Response) {
-  try {    // מקבל את המשתמש מהטוקן (דרך המידלוור)
+  try {    // מקבל את המשתמש מהטוקן (דרך middlewaere)
     const user = (req as any).user;
     console.log("userId");
     
