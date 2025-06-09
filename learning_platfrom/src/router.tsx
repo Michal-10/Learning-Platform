@@ -1,11 +1,11 @@
 
 import { createBrowserRouter, Navigate } from "react-router";
 import Layout from "./Layout";
-import HomePage from "./components/HomePage";
-import PromptHistory from "./components/PromptHistory";
-import AdminDashboard from "./components/AdminDashboard";
-import PromptCreation from "./components/PromptCreation";
-import LoginRegister from "./components/LoginRegister";
+import HomePage from "./pages/HomePage";
+import PromptHistory from "./pages/PromptHistory";
+import AdminDashboard from "./pages/AdminDashboard";
+import PromptCreation from "./pages/PromptCreation";
+import LoginRegister from "./pages/LoginRegister";
 
 export const Router = createBrowserRouter([
     {
