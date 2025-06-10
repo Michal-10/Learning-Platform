@@ -124,14 +124,14 @@ const PromptHistory: React.FC = () => {
                       <Typography variant="body2" color="text.secondary" gutterBottom>
                         קטגוריה:
                       </Typography>
-                      <Chip label={prompt.category_id.name} color="primary" size="small" sx={{ mb: 1 }} />
+                      <Chip label={prompt.category_id.name || ''} color="primary" size="small" sx={{ mb: 1 }} />
                     </Box>
 
                     <Box sx={{ mb: 2 }}>
                       <Typography variant="body2" color="text.secondary" gutterBottom>
                         תת-קטגוריה:
                       </Typography>
-                      <Chip label={prompt.sub_category_id.name} color="secondary" size="small" />
+                      <Chip label={prompt.sub_category_id.name || ''} color="secondary" size="small" />
                     </Box>
                   </CardContent>
                 </Card>
