@@ -12,18 +12,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllPromptsWithNames = void 0;
-const Prompt_1 = __importDefault(require("../models/Prompt"));
-const getAllPromptsWithNames = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const prompts = yield Prompt_1.default.find()
-            .populate('user_id', 'name')
-            .populate('category_id', 'name') // שליפת שם הקטגוריה
-            .populate('sub_category_id', 'name'); // שליפת שם תת־הקטגוריה
-        res.status(200).json(prompts);
-    }
-    catch (error) {
-        res.status(500).json({ message: 'שגיאה בשרת', error });
-    }
+exports.getAllCategoriesService = exports.createCategoryService = void 0;
+const Category_1 = __importDefault(require("../models/Category"));
+const createCategoryService = (name) => __awaiter(void 0, void 0, void 0, function* () {
+    const exists = yield Category_1.default.findOne({ name });
+    if (exists)
+        throw new Error('Category already exists');
+    const newCategory = new Category_1.default({ name });
+    return yield newCategory.save();
 });
-exports.getAllPromptsWithNames = getAllPromptsWithNames;
+exports.createCategoryService = createCategoryService;
+const getAllCategoriesService = () => __awaiter(void 0, void 0, void 0, function* () {
+    return yield Category_1.default.find();
+});
+exports.getAllCategoriesService = getAllCategoriesService;

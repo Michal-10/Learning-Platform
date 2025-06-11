@@ -47,7 +47,6 @@ const errorMiddleware_1 = require("./middleware/errorMiddleware");
 const subCategory_1 = __importDefault(require("./routes/subCategory"));
 const adminRoutes_1 = __importDefault(require("./routes/adminRoutes"));
 dotenv.config();
-console.log('🔑 OPENAI_API_KEY:', process.env.OPENAI_API_KEY);
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 5000;
 (0, db_1.default)();
@@ -62,5 +61,4 @@ app.use('/api/admin', adminRoutes_1.default);
 app.use(errorMiddleware_1.notFound);
 app.use(errorMiddleware_1.errorHandler);
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
 });

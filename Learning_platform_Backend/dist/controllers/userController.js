@@ -1,6 +1,37 @@
 "use strict";
-// import { Request, Response } from 'express';
-// import User, { IUser } from '../models/User';
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -10,77 +41,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsers = exports.loginUser = exports.registerUser = void 0;
-const User_1 = __importDefault(require("../models/User"));
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const generateToken = (userId) => {
-    return jsonwebtoken_1.default.sign({ id: userId }, process.env.JWT_SECRET, {
-        expiresIn: '30d',
-    });
-};
-const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, phone } = req.body;
+exports.login = exports.register = void 0;
+const authService = __importStar(require("../services/auth"));
+const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        if (!name || !phone) {
-            res.status(400).json({ message: 'Name, phone, and email are required' });
-            return;
-        }
-        const userExists = yield User_1.default.findOne({ phone });
-        if (userExists) {
-            res.status(400).json({ message: 'User already exists' });
-            return;
-        }
-        const user = new User_1.default({ name, phone });
-        yield user.save();
-        const token = generateToken(user._id.toString());
-        res.status(200).json({
-            user,
-            token,
-        });
+        const result = yield authService.register(req.body);
+        res.status(201).json(result);
     }
     catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ error: error.message });
     }
 });
-exports.registerUser = registerUser;
-const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("in login user");
-    const { name, phone } = req.body;
-    console.log("name  " + name + "  phone  " + phone);
+exports.register = register;
+const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        if (!phone || !name) {
-            res.status(400).json({ message: 'Phone and email are required' });
-            return;
-        }
-        console.log("before findOne");
-        console.log(User_1.default);
-        const user = yield User_1.default.findOne({ phone, name });
-        if (!user) {
-            res.status(404).json({ message: 'User not found' });
-            return;
-        }
-        const token = generateToken(user._id.toString());
-        res.status(200).json({
-            user,
-            token,
-        });
+        const result = yield authService.login(req.body);
+        res.status(200).json(result);
     }
     catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ error: error.message });
     }
 });
-exports.loginUser = loginUser;
-const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const users = yield User_1.default.find();
-        res.status(200).json(users);
-    }
-    catch (error) {
-        res.status(500).json({ message: 'Server error' });
-    }
-});
-exports.getUsers = getUsers;
+exports.login = login;

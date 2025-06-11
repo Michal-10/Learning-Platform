@@ -12,18 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllPromptsWithNames = void 0;
+exports.getPrompts = exports.createPrompt = void 0;
 const Prompt_1 = __importDefault(require("../models/Prompt"));
-const getAllPromptsWithNames = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const prompts = yield Prompt_1.default.find()
-            .populate('user_id', 'name')
-            .populate('category_id', 'name') // שליפת שם הקטגוריה
-            .populate('sub_category_id', 'name'); // שליפת שם תת־הקטגוריה
-        res.status(200).json(prompts);
+const createPrompt = (userId, data) => __awaiter(void 0, void 0, void 0, function* () {
+    const { prompt, categoryId, subCategoryId } = data;
+    if (!prompt || !categoryId || !subCategoryId) {
+        throw new Error('All fields are required');
     }
-    catch (error) {
-        res.status(500).json({ message: 'שגיאה בשרת', error });
-    }
+    const newPrompt = new Prompt_1.default({ prompt, categoryId, subCategoryId, userId });
+    return yield newPrompt.save();
 });
-exports.getAllPromptsWithNames = getAllPromptsWithNames;
+exports.createPrompt = createPrompt;
+const getPrompts = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield Prompt_1.default.find({ userId });
+});
+exports.getPrompts = getPrompts;

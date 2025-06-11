@@ -50,14 +50,12 @@ const openai_1 = __importDefault(require("openai"));
 const dotenv = __importStar(require("dotenv"));
 dotenv.config();
 const openai = new openai_1.default({
-    apiKey: process.env.OPENAI_API_KEY, // ודא שקיים בקובץ .env
+    apiKey: process.env.OPENAI_API_KEY,
 });
 function getAIResponse(prompt) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("prompt");
-        console.log(prompt);
         const response = yield openai.chat.completions.create({
-            model: 'gpt-4-turbo', // או 'gpt-4' אם יש לך גישה
+            model: 'gpt-4-turbo',
             messages: [
                 {
                     role: 'user',

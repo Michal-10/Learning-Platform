@@ -1,5 +1,4 @@
 "use strict";
-// // controllers/subCategoryController.ts
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -9,33 +8,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSubCategoriesByCategory = exports.getAllSubCategories = exports.createSubCategory = void 0;
-const SubCategory_1 = __importDefault(require("../models/SubCategory"));
-// יצירת תת־קטגוריה
+const subCategory_1 = require("../services/subCategory");
 const createSubCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, category_id } = req.body;
-        if (!name || !category_id) {
-            res.status(400).json({ error: 'Name and category_id required' });
-            return;
-        }
-        const newSubCategory = new SubCategory_1.default({ name, category_id });
-        yield newSubCategory.save();
-        res.status(201).json(newSubCategory);
+        if (!name || !category_id)
+            return res.status(400).json({ error: 'Name and category_id required' });
+        const subCategory = yield (0, subCategory_1.createSubCategoryService)(name, category_id);
+        res.status(201).json(subCategory);
     }
     catch (error) {
         res.status(500).json({ error: 'Failed to create sub-category' });
     }
 });
 exports.createSubCategory = createSubCategory;
-// שליפת כל תתי־הקטגוריות (כולל קטגוריה משויכת)
 const getAllSubCategories = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const subCategories = yield SubCategory_1.default.find().populate('category_id');
+        const subCategories = yield (0, subCategory_1.getAllSubCategoriesService)();
         res.status(200).json(subCategories);
     }
     catch (error) {
@@ -43,11 +34,10 @@ const getAllSubCategories = (req, res) => __awaiter(void 0, void 0, void 0, func
     }
 });
 exports.getAllSubCategories = getAllSubCategories;
-// שליפת תתי־קטגוריות לפי קטגוריה
 const getSubCategoriesByCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { categoryId } = req.params;
-        const subCategories = yield SubCategory_1.default.find({ category_id: categoryId });
+        const subCategories = yield (0, subCategory_1.getSubCategoriesByCategoryService)(categoryId);
         res.status(200).json(subCategories);
     }
     catch (error) {
