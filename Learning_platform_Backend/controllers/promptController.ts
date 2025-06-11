@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import Prompt from '../models/Prompt';
 import { getAIResponse } from '../services/openaiService';
+import mongoose from 'mongoose';
 
 export async function createPrompt(req: Request, res: Response) {
   try {
@@ -8,22 +9,21 @@ export async function createPrompt(req: Request, res: Response) {
     const { category_id, sub_category_id, prompt } = req.body;
 
     // מקבל את המשתמש מהטוקן (דרך המידלוור)
-    const user = (req as any).user;
-    console.log("User from token:", user);
+    const userId = (req as any).user.id;
+    console.log("User from token:", userId);
     console.log("Request Body:", req.body);
-    console.log(user.id);
     
     
     
 
-    if (!user || !category_id || !sub_category_id || !prompt) {
+    if (!userId || !category_id || !sub_category_id || !prompt) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
     const aiResponse = await getAIResponse(prompt);
 
     const newPrompt = new Prompt({
-      user_id: user.id,
+      user_id: new mongoose.Types.ObjectId(userId.toString()), // Convert userId to ObjectId
       category_id,
       sub_category_id,
       prompt,
