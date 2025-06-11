@@ -9,6 +9,12 @@ export async function createPrompt(req: Request, res: Response) {
 
     // מקבל את המשתמש מהטוקן (דרך המידלוור)
     const user = (req as any).user;
+    console.log("User from token:", user);
+    console.log("Request Body:", req.body);
+    console.log(user.id);
+    
+    
+    
 
     if (!user || !category_id || !sub_category_id || !prompt) {
       return res.status(400).json({ error: 'Missing required fields' });
@@ -23,6 +29,8 @@ export async function createPrompt(req: Request, res: Response) {
       prompt,
       response: aiResponse,
     });
+console.log("New Prompt Object:", newPrompt);
+console.log(newPrompt.user_id);
 
     await newPrompt.save();
     res.status(201).json(aiResponse);
