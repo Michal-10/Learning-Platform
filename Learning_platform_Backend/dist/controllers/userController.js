@@ -47,6 +47,7 @@ const authService = __importStar(require("../services/auth"));
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield authService.register(req.body);
+        console.log('User registered successfully:', result);
         res.status(201).json(result);
     }
     catch (error) {

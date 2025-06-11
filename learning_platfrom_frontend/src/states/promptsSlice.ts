@@ -24,6 +24,8 @@ export const sendPrompt = createAsyncThunk(
     ) => {
         const state = thunkAPI.getState() as RootState;
         const token = state.auth.token;
+        console.log("in sendPrompt thunk");
+        console.log(token);
 
         try {
             const res = await axios.post(`${import.meta.env.VITE_API_URL}/prompts/create`, data

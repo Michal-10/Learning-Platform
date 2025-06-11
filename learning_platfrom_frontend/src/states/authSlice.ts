@@ -22,6 +22,8 @@ export const loginUser = createAsyncThunk(
   async (credentials: { phone: string, name:string }, thunkAPI) => {
     try {
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/user/login`, credentials);
+      console.log('Login response:', res.data);
+      
       return res.data;
     } catch (err: any) {
       return thunkAPI.rejectWithValue(err.response.data);
@@ -60,6 +62,9 @@ const userSlice = createSlice({
         state.loading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;
+        console.log('Login successful:', action.payload);
+       console.log('Current state after login:', state.user);
+       console.log('Current state after login:', state.token);
       })
       .addCase(loginUser.rejected, (state, action: any) => {
         state.loading = false;

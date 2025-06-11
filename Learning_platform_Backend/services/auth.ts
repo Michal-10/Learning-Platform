@@ -19,7 +19,7 @@ export const register = async (data: any) => {
   await newUser.save();
 
   const token = jwt.sign({ userId: newUser._id }, JWT_SECRET, { expiresIn: '1d' });
-  return { token };
+  return { token,newUser };
 };
 
 export const login = async (data: any) => {
@@ -34,11 +34,6 @@ export const login = async (data: any) => {
     throw new Error('Invalid credentials');
   }
 
-//   const isMatch = await bcrypt.compare(password, user.password);
-//   if (!isMatch) {
-//     throw new Error('Invalid credentials');
-//   }
-
   const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1d' });
-  return { token };
+  return { token, user };
 };

@@ -61,4 +61,5 @@ app.use('/api/admin', adminRoutes_1.default);
 app.use(errorMiddleware_1.notFound);
 app.use(errorMiddleware_1.errorHandler);
 app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });

@@ -28,7 +28,7 @@ const register = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const newUser = new User_1.default({ name, phone });
     yield newUser.save();
     const token = jsonwebtoken_1.default.sign({ userId: newUser._id }, JWT_SECRET, { expiresIn: '1d' });
-    return { token };
+    return { token, newUser };
 });
 exports.register = register;
 const login = (data) => __awaiter(void 0, void 0, void 0, function* () {
@@ -40,11 +40,7 @@ const login = (data) => __awaiter(void 0, void 0, void 0, function* () {
     if (!user) {
         throw new Error('Invalid credentials');
     }
-    //   const isMatch = await bcrypt.compare(password, user.password);
-    //   if (!isMatch) {
-    //     throw new Error('Invalid credentials');
-    //   }
     const token = jsonwebtoken_1.default.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1d' });
-    return { token };
+    return { token, user };
 });
 exports.login = login;
