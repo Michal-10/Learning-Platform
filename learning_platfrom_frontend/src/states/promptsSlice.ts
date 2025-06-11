@@ -28,8 +28,8 @@ export const sendPrompt = createAsyncThunk(
         console.log(token);
 
         try {
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/prompts/create`, data
-                , {
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/prompts/create`, data,
+                {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

@@ -98,7 +98,7 @@ const PromptDetailDialog = ({ open, onClose, selectedPrompt, users }: PromptDeta
                     <Chip label={selectedPrompt.category_id.name} color="secondary" />
                   </Box>
                   <Box>
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                    <Typography marginRight={'20px'} variant="body2" color="text.secondary" gutterBottom>
                       תת-קטגוריה:
                     </Typography>
                     <Chip label={selectedPrompt.sub_category_id.name} color="info" />
