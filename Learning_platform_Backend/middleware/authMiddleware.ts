@@ -19,10 +19,11 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
 
   const token = authHeader.split(' ')[1];
   console.log("Extracted Token:", token);
-  
+
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { id: string };
-    (req as any).user = { id: decoded.id };
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {  userId: string };
+    (req as any).user = { id: decoded. userId };
+    console.log("Decoded User ID:", (req as any).user.id);
     next();
   } catch (error) {
     return res.status(401).json({ error: 'Invalid token' });
