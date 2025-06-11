@@ -5,13 +5,10 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY!, // ודא שקיים בקובץ .env
+  apiKey: process.env.OPENAI_API_KEY!, 
 });
 
 export async function getAIResponse(prompt: string): Promise<string> {
-  console.log("prompt");
-  console.log(prompt);
-  
   
   const response = await openai.chat.completions.create({
     model: 'gpt-4-turbo', 

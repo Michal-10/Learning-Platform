@@ -21,7 +21,6 @@ export const loginUser = createAsyncThunk(
   'user/login',
   async (credentials: { phone: string, name:string }, thunkAPI) => {
     try {
-      console.log(import.meta.env.VITE_API_URL);  
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/user/login`, credentials);
       return res.data;
     } catch (err: any) {
@@ -58,13 +57,6 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        console.log("loginUser.fulfilled,");
-        console.log(action.payload.user);
-        console.log("loginUser.fulfilled,");
-        console.log("action.payload.token;");
-        console.log(action.payload.token);
-        console.log("action.payload.token;");
-        
         state.loading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;

@@ -100,7 +100,6 @@ const AdminDashboard = () => {
           </Tooltip>
         </Box>
 
-        {/* Statistics Cards - ללא Grid */}
         <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={3} sx={{ mb: 4 }}>
           <Card elevation={2} sx={{ flex: 1, textAlign: "center", bgcolor: "primary.light", color: "white" }}>
             <CardContent>
@@ -134,7 +133,6 @@ const AdminDashboard = () => {
         </Box>
       </Paper>
 
-      {/* Data Table */}
       <Paper elevation={3} sx={{ borderRadius: 2 }} ref={printRef}>
         <Box sx={{ p: 2, borderBottom: 1, borderColor: "divider" }}>
           <Typography variant="h6" fontWeight="bold">
@@ -227,7 +225,6 @@ const AdminDashboard = () => {
         )}
       </Paper>
 
-      {/* Detail Dialog Component */}
       <PromptDetailDialog
         open={dialogOpen}
         onClose={handleCloseDialog}

@@ -22,15 +22,8 @@ export const sendPrompt = createAsyncThunk(
         data: { prompt: string; category_id: string; sub_category_id: string },
         thunkAPI
     ) => {
-        console.log("data");
-        console.log(data);
         const state = thunkAPI.getState() as RootState;
         const token = state.auth.token;
-        console.log(token);
-
-        console.log("before ");
-        console.log(`${import.meta.env.VITE_API_URL}/prompts/create`);
-
 
         try {
             const res = await axios.post(`${import.meta.env.VITE_API_URL}/prompts/create`, data
@@ -40,13 +33,6 @@ export const sendPrompt = createAsyncThunk(
                     }
                 }
             );
-            console.log("res");
-            console.log(res);
-            console.log("res.data");
-            console.log(res.data);
-
-
-
             return res.data;
         } catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);
@@ -65,10 +51,6 @@ export const fetchPromptHistory = createAsyncThunk(
                     Authorization: `Bearer ${token}`
                 }
             });
-            console.log("res.data");
-            console.log(res.data);
-
-            console.log("res.data");
 
             return res.data;
         } catch (err: any) {
@@ -82,10 +64,6 @@ export const getAllPrompts = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             const res = await axios.get(`${import.meta.env.VITE_API_URL}/admin/dashboard`);
-            console.log("res.data");
-            console.log(res.data);
-            console.log("res.data");
-
             return res.data;
         } catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);

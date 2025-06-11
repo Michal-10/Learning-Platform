@@ -33,7 +33,6 @@ export const fetchCategories = createAsyncThunk(
 export const fetchSubcategories = createAsyncThunk(
   'category/fetchSubcategories',
   async (categoryId: string, thunkAPI) => {
-    console.log("categoryId", categoryId);
     
     try {
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/subcategories/category/${categoryId}`);

@@ -33,11 +33,6 @@ export default () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down("md"))
-
-  console.log("///////////////////")
-  console.log(user)
-  console.log("///////////////////")
-
   const handleLogout = () => {
     dispatch(logout())
     navigate("/HomePage")
@@ -67,7 +62,6 @@ export default () => {
           AI Learning Platform
         </Typography>
 
-        {/* Desktop Navigation */}
         {!isMobile && (
           <Box sx={{ display: "flex", gap: 1 }}>
             <Button color="inherit" component={Link} to="/" startIcon={<HomeIcon />} sx={{ gap: 1, fontWeight: 500 }}>
@@ -115,7 +109,6 @@ export default () => {
           </Box>
         )}
 
-        {/* Mobile Navigation */}
         {isMobile && (
           <Box>
             <IconButton size="large" edge="start" color="inherit" aria-label="menu" onClick={handleMenu}>

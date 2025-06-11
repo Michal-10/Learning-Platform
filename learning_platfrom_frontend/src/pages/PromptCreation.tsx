@@ -109,7 +109,6 @@ export default () => {
         </Stepper>
 
         <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-          {/* Category Selection */}
           <Card variant="outlined" sx={{ p: 2 }}>
             <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
               <CategoryIcon sx={{ mr: 1, color: "primary.main" }} />
@@ -131,7 +130,6 @@ export default () => {
             {selectedCategory && <Chip label={selectedCategory.name} color="primary" sx={{ mt: 2 }} />}
           </Card>
 
-          {/* Subcategory Selection */}
           {catId && (
             <Fade in={Boolean(catId)}>
               <Card variant="outlined" sx={{ p: 2 }}>
@@ -157,7 +155,6 @@ export default () => {
             </Fade>
           )}
 
-          {/* Prompt Input */}
           {subCatId && (
             <Fade in={Boolean(subCatId)}>
               <Card variant="outlined" sx={{ p: 2 }}>
@@ -191,7 +188,6 @@ export default () => {
             </Fade>
           )}
 
-          {/* Response Display */}
           {promptState.prompts.length > 0 && (
             <Fade in={promptState.prompts.length > 0}>
               <Card

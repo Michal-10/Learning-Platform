@@ -11,7 +11,6 @@ import subCategoryRoutes from './routes/subCategory';
 import adminRoutes from './routes/adminRoutes';
 
 dotenv.config();
-console.log('🔑 OPENAI_API_KEY:', process.env.OPENAI_API_KEY);
 
 const app: Application = express();
 const PORT = process.env.PORT || 5000;
@@ -32,5 +31,4 @@ app.use(notFound);
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
 });

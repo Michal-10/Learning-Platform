@@ -52,7 +52,7 @@ import {
               mb: 6,
             }}
           >
-            {[ // רשימת הכרטיסים
+            {[ 
               {
                 icon: <CreateIcon sx={{ fontSize: 48, color: "primary.main", mb: 2 }} />,
                 title: "צור פרומפט חדש",
