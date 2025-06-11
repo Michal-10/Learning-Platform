@@ -27,6 +27,8 @@ const register = (data) => __awaiter(void 0, void 0, void 0, function* () {
     }
     const newUser = new User_1.default({ name, phone });
     yield newUser.save();
+    console.log("JWT_SECRET");
+    console.log(JWT_SECRET);
     const token = jsonwebtoken_1.default.sign({ userId: newUser._id }, JWT_SECRET, { expiresIn: '1d' });
     return { token, newUser };
 });

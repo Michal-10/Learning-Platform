@@ -16,23 +16,28 @@ exports.createPrompt = createPrompt;
 exports.getUserPrompts = getUserPrompts;
 const Prompt_1 = __importDefault(require("../models/Prompt"));
 const openaiService_1 = require("../services/openaiService");
+const mongoose_1 = __importDefault(require("mongoose"));
 function createPrompt(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const { category_id, sub_category_id, prompt } = req.body;
             // מקבל את המשתמש מהטוקן (דרך המידלוור)
-            const user = req.user;
-            if (!user || !category_id || !sub_category_id || !prompt) {
+            const userId = req.user.id;
+            console.log("User from token:", userId);
+            console.log("Request Body:", req.body);
+            if (!userId || !category_id || !sub_category_id || !prompt) {
                 return res.status(400).json({ error: 'Missing required fields' });
             }
             const aiResponse = yield (0, openaiService_1.getAIResponse)(prompt);
             const newPrompt = new Prompt_1.default({
-                user_id: user.id,
+                user_id: new mongoose_1.default.Types.ObjectId(userId.toString()), // Convert userId to ObjectId
                 category_id,
                 sub_category_id,
                 prompt,
                 response: aiResponse,
             });
+            console.log("New Prompt Object:", newPrompt);
+            console.log(newPrompt.user_id);
             yield newPrompt.save();
             res.status(201).json(aiResponse);
         }

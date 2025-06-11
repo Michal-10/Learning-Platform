@@ -16,9 +16,12 @@ const authMiddleware = (req, res, next) => {
     }
     const token = authHeader.split(' ')[1];
     console.log("Extracted Token:", token);
+    console.log("Verifying Token with Secret:", process.env.JWT_SECRET);
     try {
+        console.log("Verifying Token with Secret:", process.env.JWT_SECRET);
         const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
-        req.user = { id: decoded.id };
+        req.user = { id: decoded.userId };
+        console.log("Decoded User ID:", req.user.id);
         next();
     }
     catch (error) {
