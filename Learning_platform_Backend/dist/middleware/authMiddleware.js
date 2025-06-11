@@ -6,11 +6,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.authMiddleware = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const authMiddleware = (req, res, next) => {
+    console.log("Auth Middleware Triggered");
+    console.log("Request Headers:", req.headers);
+    console.log("Request Body:", req.body);
     const authHeader = req.headers.authorization;
+    console.log("Authorization Header:", authHeader);
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return res.status(401).json({ error: 'No token provided' });
     }
     const token = authHeader.split(' ')[1];
+    console.log("Extracted Token:", token);
     try {
         const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
         req.user = { id: decoded.id };

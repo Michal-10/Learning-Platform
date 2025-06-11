@@ -17,7 +17,7 @@ export async function createPrompt(req: Request, res: Response) {
     const aiResponse = await getAIResponse(prompt);
 
     const newPrompt = new Prompt({
-      user_id: user.userId,
+      user_id: user.id,
       category_id,
       sub_category_id,
       prompt,
