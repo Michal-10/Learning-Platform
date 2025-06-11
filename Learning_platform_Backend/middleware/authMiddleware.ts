@@ -19,6 +19,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
 
   const token = authHeader.split(' ')[1];
   console.log("Extracted Token:", token);
+  console.log("Verifying Token with Secret:", process.env.JWT_SECRET);
 
   try {
     console.log("Verifying Token with Secret:", process.env.JWT_SECRET);
