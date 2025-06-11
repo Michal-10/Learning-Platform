@@ -18,6 +18,9 @@ export const register = async (data: any) => {
   const newUser = new User({ name, phone });
   await newUser.save();
 
+  console.log("JWT_SECRET");
+  console.log(JWT_SECRET);
+  
   const token = jwt.sign({ userId: newUser._id }, JWT_SECRET, { expiresIn: '1d' });
   return { token,newUser };
 };
