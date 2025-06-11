@@ -4,7 +4,6 @@ import { getAIResponse } from '../services/openaiService';
 
 export async function createPrompt(req: Request, res: Response) {
   try {
-console.log("in createPrompt");
 
     const { category_id, sub_category_id, prompt } = req.body;
 
@@ -18,7 +17,7 @@ console.log("in createPrompt");
     const aiResponse = await getAIResponse(prompt);
 
     const newPrompt = new Prompt({
-      user_id: user.id,
+      user_id: user.userId,
       category_id,
       sub_category_id,
       prompt,

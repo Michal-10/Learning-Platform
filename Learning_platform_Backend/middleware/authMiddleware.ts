@@ -3,10 +3,6 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
-  console.log("Auth Middleware Triggered");
-  console.log("Request Headers:", req.headers);
-  console.log("Request Body:", req.body);
-  
   
   const authHeader = req.headers.authorization;
 
