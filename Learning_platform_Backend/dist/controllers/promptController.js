@@ -27,7 +27,7 @@ function createPrompt(req, res) {
             }
             const aiResponse = yield (0, openaiService_1.getAIResponse)(prompt);
             const newPrompt = new Prompt_1.default({
-                user_id: user.id,
+                user_id: user.userId,
                 category_id,
                 sub_category_id,
                 prompt,
