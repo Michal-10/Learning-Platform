@@ -35,6 +35,7 @@ export default () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"))
   const handleLogout = () => {
     dispatch(logout())
+    sessionStorage.removeItem("userToken")
     navigate("/HomePage")
     setAnchorEl(null)
   }

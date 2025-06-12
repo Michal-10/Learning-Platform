@@ -18,12 +18,20 @@ interface TokenPayload {
 }
 
 export const initialUser = (): User => {
+console.log("initialUser called");
+console.log("sessionStorage.getItem('userToken')", sessionStorage.getItem("userToken"));
+
+
   const token = sessionStorage.getItem("userToken") ;
+  console.log(token);
+  
     if (!token)
       return {} as User;
 
   try {
     const decoded = jwtDecode<TokenPayload>(token);
+    console.log("Decoded token:", decoded);
+    
     return {
       id: decoded.userId,
       name: decoded.name,
@@ -62,7 +70,7 @@ export const registerUser = createAsyncThunk(
 
 const initialState: UserState = {
   user: initialUser(),
-  token: null,
+  token: sessionStorage.getItem("userToken") || null,
   loading: false,
   error: null,
 };
