@@ -24,8 +24,6 @@ export const sendPrompt = createAsyncThunk(
     ) => {
         const state = thunkAPI.getState() as RootState;
         const token = state.auth.token;
-        console.log("in sendPrompt thunk");
-        console.log(token);
 
         try {
             const res = await axios.post(`${import.meta.env.VITE_API_URL}/prompts/create`, data,
@@ -53,7 +51,6 @@ export const fetchPromptHistory = createAsyncThunk(
                     Authorization: `Bearer ${token}`
                 }
             });
-
             return res.data;
         } catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);
@@ -66,6 +63,7 @@ export const getAllPrompts = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             const res = await axios.get(`${import.meta.env.VITE_API_URL}/admin/dashboard`);
+            console.log(res.data);
             return res.data;
         } catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);
