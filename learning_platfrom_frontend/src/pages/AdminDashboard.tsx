@@ -178,10 +178,10 @@ const AdminDashboard = () => {
                       <Chip label={user?.name || p.userId} color="primary" variant="outlined" size="small" />
                     </TableCell>
                     <TableCell align="right">
-                      <Chip label={p.category_id.name || '' } color="secondary" size="small" />
+                      <Chip label={p.category_id?.name || '' } color="secondary" size="small" />
                     </TableCell>
                     <TableCell align="right">
-                      <Chip label={p.sub_category_id.name || '' } color="info" size="small" />
+                      <Chip label={p.sub_category_id?.name || '' } color="info" size="small" />
                     </TableCell>
                     <TableCell align="right" sx={{ maxWidth: 200 }}>
                       <Typography
