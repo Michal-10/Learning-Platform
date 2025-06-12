@@ -10,13 +10,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSubCategoriesByCategory = exports.getAllSubCategories = exports.createSubCategory = void 0;
-const subCategory_1 = require("../services/subCategory");
+const subCategoryService_1 = require("../services/subCategoryService");
 const createSubCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, category_id } = req.body;
         if (!name || !category_id)
             return res.status(400).json({ error: 'Name and category_id required' });
-        const subCategory = yield (0, subCategory_1.createSubCategoryService)(name, category_id);
+        const subCategory = yield (0, subCategoryService_1.createSubCategoryService)(name, category_id);
         res.status(201).json(subCategory);
     }
     catch (error) {
@@ -26,7 +26,7 @@ const createSubCategory = (req, res) => __awaiter(void 0, void 0, void 0, functi
 exports.createSubCategory = createSubCategory;
 const getAllSubCategories = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const subCategories = yield (0, subCategory_1.getAllSubCategoriesService)();
+        const subCategories = yield (0, subCategoryService_1.getAllSubCategoriesService)();
         res.status(200).json(subCategories);
     }
     catch (error) {
@@ -37,7 +37,7 @@ exports.getAllSubCategories = getAllSubCategories;
 const getSubCategoriesByCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { categoryId } = req.params;
-        const subCategories = yield (0, subCategory_1.getSubCategoriesByCategoryService)(categoryId);
+        const subCategories = yield (0, subCategoryService_1.getSubCategoriesByCategoryService)(categoryId);
         res.status(200).json(subCategories);
     }
     catch (error) {

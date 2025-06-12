@@ -10,13 +10,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllCategories = exports.createCategory = void 0;
-const category_1 = require("../services/category");
+const categoryService_1 = require("../services/categoryService");
 const createCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name } = req.body;
         if (!name)
             return res.status(400).json({ error: 'Name required' });
-        const category = yield (0, category_1.createCategoryService)(name);
+        const category = yield (0, categoryService_1.createCategoryService)(name);
         res.status(201).json(category);
     }
     catch (error) {
@@ -26,7 +26,7 @@ const createCategory = (req, res) => __awaiter(void 0, void 0, void 0, function*
 exports.createCategory = createCategory;
 const getAllCategories = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const categories = yield (0, category_1.getAllCategoriesService)();
+        const categories = yield (0, categoryService_1.getAllCategoriesService)();
         res.status(200).json(categories);
     }
     catch (error) {

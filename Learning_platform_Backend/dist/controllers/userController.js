@@ -43,7 +43,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.login = exports.register = void 0;
-const authService = __importStar(require("../services/auth"));
+const authService = __importStar(require("../services/authService"));
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield authService.register(req.body);

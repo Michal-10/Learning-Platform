@@ -12,8 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllPromptsWithNames = void 0;
+exports.getAllUsers = exports.getAllPromptsWithNames = void 0;
 const Prompt_1 = __importDefault(require("../models/Prompt"));
+const adminService_1 = require("../services/adminService");
 const getAllPromptsWithNames = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const prompts = yield Prompt_1.default.find()
@@ -27,3 +28,13 @@ const getAllPromptsWithNames = (req, res) => __awaiter(void 0, void 0, void 0, f
     }
 });
 exports.getAllPromptsWithNames = getAllPromptsWithNames;
+const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const categories = yield (0, adminService_1.getAllUsersService)();
+        res.status(200).json(categories);
+    }
+    catch (error) {
+        res.status(500).json({ error: 'Failed to fetch categories' });
+    }
+});
+exports.getAllUsers = getAllUsers;
