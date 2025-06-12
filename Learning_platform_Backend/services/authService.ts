@@ -18,7 +18,8 @@ export const register = async (data: any) => {
   const newUser = new User({ name, phone });
   await newUser.save();
   
-  const token = jwt.sign({ userId: newUser._id }, JWT_SECRET, { expiresIn: '1d' });
+  const token = jwt.sign({ userId: newUser._id, name: newUser.name, phone: newUser.phone },
+    JWT_SECRET, { expiresIn: '1d' });
   return { token,newUser };
 };
 
@@ -34,6 +35,7 @@ export const login = async (data: any) => {
     throw new Error('Invalid credentials');
   }
 
-  const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1d' });
+  const token = jwt.sign({ userId: user._id, name: user.name, phone: user.phone },
+    JWT_SECRET, { expiresIn: '1d' });
   return { token, user };
 };

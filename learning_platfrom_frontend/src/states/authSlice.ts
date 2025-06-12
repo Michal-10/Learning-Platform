@@ -2,6 +2,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import type { User } from '../models/User';
+import { jwtDecode } from "jwt-decode";
 
 interface UserState {
   user: User;
@@ -10,12 +11,30 @@ interface UserState {
   error: string | null;
 }
 
-const initialState: UserState = {
-  user: {} as User,
-  token: null,
-  loading: false,
-  error: null,
+interface TokenPayload {
+  userId: string;
+  name: string;
+  phone: string;
+}
+
+export const initialUser = (): User => {
+  const token = sessionStorage.getItem("userToken") ;
+    if (!token)
+      return {} as User;
+
+  try {
+    const decoded = jwtDecode<TokenPayload>(token);
+    return {
+      id: decoded.userId,
+      name: decoded.name,
+      phone: decoded.phone
+    };
+  } catch (error) {
+    console.error('Invalid token', error);
+    return {} as User;
+  }
 };
+
 
 export const loginUser = createAsyncThunk(
   'user/login',
@@ -41,6 +60,12 @@ export const registerUser = createAsyncThunk(
   }
 );
 
+const initialState: UserState = {
+  user: initialUser(),
+  token: null,
+  loading: false,
+  error: null,
+};
 const userSlice = createSlice({
   name: 'user',
   initialState,

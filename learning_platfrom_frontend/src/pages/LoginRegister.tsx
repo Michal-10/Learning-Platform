@@ -43,7 +43,7 @@ const LoginRegister: React.FC = () => {
 
     const action = isLogin ? loginUser : registerUser
     const res = await dispatch(action(form))
-
+    localStorage.setItem("userToken", res.payload.token);
     if (res.meta.requestStatus === "fulfilled") {
       navigate(isLogin ? "/" : "/HomePage")
     }
