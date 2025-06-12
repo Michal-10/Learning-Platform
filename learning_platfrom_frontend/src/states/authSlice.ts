@@ -64,7 +64,7 @@ export const registerUser = createAsyncThunk(
 
 const initialState: UserState = {
   user: initialUser(),
-  token: sessionStorage.getItem("userToken") || null,
+  token: localStorage.getItem("userToken") || null,
   loading: false,
   error: null,
 };

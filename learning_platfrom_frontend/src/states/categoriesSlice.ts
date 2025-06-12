@@ -11,13 +11,6 @@ interface CategoryState {
   error: string | null;
 }
 
-const initialState: CategoryState = {
-  categories: [],
-  subcategories: [],
-  loading: false,
-  error: null,
-};
-
 export const fetchCategories = createAsyncThunk(
   'category/fetchCategories',
   async (_, thunkAPI) => {
@@ -41,6 +34,13 @@ export const fetchSubcategories = createAsyncThunk(
     }
   }
 );
+
+const initialState: CategoryState = {
+  categories: [],
+  subcategories: [],
+  loading: false,
+  error: null,
+};
 
 const categorySlice = createSlice({
   name: 'category',
