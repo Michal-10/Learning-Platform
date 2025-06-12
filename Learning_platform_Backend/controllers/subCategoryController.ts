@@ -4,7 +4,7 @@ import {
   createSubCategoryService,
   getAllSubCategoriesService,
   getSubCategoriesByCategoryService
-} from '../services/subCategory';
+} from '../services/subCategoryService';
 
 export const createSubCategory = async (req: Request, res: Response) => {
   try {

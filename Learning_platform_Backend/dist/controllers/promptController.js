@@ -23,8 +23,6 @@ function createPrompt(req, res) {
             const { category_id, sub_category_id, prompt } = req.body;
             // מקבל את המשתמש מהטוקן (דרך המידלוור)
             const userId = req.user.id;
-            console.log("User from token:", userId);
-            console.log("Request Body:", req.body);
             if (!userId || !category_id || !sub_category_id || !prompt) {
                 return res.status(400).json({ error: 'Missing required fields' });
             }
@@ -36,8 +34,6 @@ function createPrompt(req, res) {
                 prompt,
                 response: aiResponse,
             });
-            console.log("New Prompt Object:", newPrompt);
-            console.log(newPrompt.user_id);
             yield newPrompt.save();
             res.status(201).json(aiResponse);
         }

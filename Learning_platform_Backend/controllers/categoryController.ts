@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { createCategoryService, getAllCategoriesService } from '../services/category';
+import { createCategoryService, getAllCategoriesService } from '../services/categoryService';
 
 export const createCategory = async (req: Request, res: Response) => {
   try {
