@@ -63,10 +63,6 @@ export const getAllPrompts = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             const res = await axios.get(`${import.meta.env.VITE_API_URL}/admin/dashboard`);
-            console.log("in getAllPrompts", res.data);
-            console.log(res.data);
-            
-            
             return res.data;
         } catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);

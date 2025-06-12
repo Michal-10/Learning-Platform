@@ -17,7 +17,7 @@ export const fetchUsers = createAsyncThunk(
   "users/fetchUsers",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}//admin/users`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/users`);
       if (!res.ok) throw new Error("Failed to fetch users");
       return (await res.json()) as User[];
     } catch (err) {

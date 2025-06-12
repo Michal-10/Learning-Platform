@@ -163,7 +163,6 @@ const AdminDashboard = () => {
             </TableHead>
             <TableBody>
               {promptsState.prompts.map((p: any) => {
-                const user = usersState.users.find((u) => u.id === p.userId)
                 return (
                   <TableRow
                     key={p.id}
@@ -175,7 +174,7 @@ const AdminDashboard = () => {
                     }}
                   >
                     <TableCell align="right">
-                      <Chip label={user?.name || p.userId} color="primary" variant="outlined" size="small" />
+                      <Chip label={ p.user_id.name } color="primary" variant="outlined" size="small" />
                     </TableCell>
                     <TableCell align="right">
                       <Chip label={p.category_id?.name || '' } color="secondary" size="small" />
