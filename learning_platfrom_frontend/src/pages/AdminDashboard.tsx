@@ -29,13 +29,13 @@ import TrendingUpIcon from "@mui/icons-material/TrendingUp"
 import PromptDetailDialog from "./PromptDetailDialog"
 
 const AdminDashboard = () => {
-  const dispatch = useDispatch<AppDispatch>()
-  const usersState = useSelector((s: RootState) => s.users)
-  const promptsState = useSelector((s: RootState) => s.prompts)
-  const printRef = useRef<HTMLDivElement>(null)
+  const dispatch = useDispatch<AppDispatch>();
+  const usersState = useSelector((s: RootState) => s.users);
+  const promptsState = useSelector((s: RootState) => s.prompts);
+  const printRef = useRef<HTMLDivElement>(null);
 
-  const [selectedPrompt, setSelectedPrompt] = useState<any>(null)
-  const [dialogOpen, setDialogOpen] = useState(false)
+  const [selectedPrompt, setSelectedPrompt] = useState<any>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchUsers())
@@ -178,10 +178,10 @@ const AdminDashboard = () => {
                       <Chip label={user?.name || p.userId} color="primary" variant="outlined" size="small" />
                     </TableCell>
                     <TableCell align="right">
-                      <Chip label={p.category_id.name } color="secondary" size="small" />
+                      <Chip label={p.category_id.name || '' } color="secondary" size="small" />
                     </TableCell>
                     <TableCell align="right">
-                      <Chip label={p.sub_category_id.name } color="info" size="small" />
+                      <Chip label={p.sub_category_id.name || '' } color="info" size="small" />
                     </TableCell>
                     <TableCell align="right" sx={{ maxWidth: 200 }}>
                       <Typography
