@@ -18,19 +18,13 @@ interface TokenPayload {
 }
 
 export const initialUser = (): User => {
-console.log("initialUser called");
-console.log("sessionStorage.getItem('userToken')", sessionStorage.getItem("userToken"));
 
-
-  const token = sessionStorage.getItem("userToken") ;
-  console.log(token);
-  
+  const token = localStorage.getItem("userToken") ;
     if (!token)
       return {} as User;
 
   try {
     const decoded = jwtDecode<TokenPayload>(token);
-    console.log("Decoded token:", decoded);
     
     return {
       id: decoded.userId,
