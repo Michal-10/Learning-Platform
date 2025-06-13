@@ -6,8 +6,8 @@ export const getAllPromptsWithNames = async (req: Request, res: Response): Promi
   try {
     const prompts = await Prompt.find()
       .populate('user_id', 'name' )  
-      .populate('category_id', 'name' )         // שליפת שם הקטגוריה
-      .populate('sub_category_id', 'name');     // שליפת שם תת־הקטגוריה
+      .populate('category_id', 'name' )
+      .populate('sub_category_id', 'name');    
     res.status(200).json(prompts);
   } catch (error) {
     res.status(500).json({ message: 'שגיאה בשרת', error });
