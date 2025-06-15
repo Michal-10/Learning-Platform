@@ -25,7 +25,7 @@
 | 🗂️ Database     | MongoDB עם Mongoose                  |
 | 🌐 Frontend      | React, TypeScript, Vite, Material UI |
 | 🔒 אימות         | JWT + Middleware                     |
-| ⚙️ Dev Tools     | Docker, dotenv, Netlify, Render      |
+| ⚙️ Dev Tools     | dotenv, Netlify, Render      |
 
 ---
 
