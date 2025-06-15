@@ -103,6 +103,15 @@ OPENAI_API_KEY=your_openai_key
 
 ---
 
+## 📌 הנחות שבוצעו
+
+- אין צורך באימות דוא״ל
+- המשתמש נדרש רק לשם וטלפון
+- תגובות GPT נשמרות במערכת כשיעורים
+- קטגוריות ותת־קטגוריות מוזנות מראש
+
+---
+
 ## 🔗 קוד מקור
 
 📁 GitHub Repository: [https://github.com/Michal-10/Learning-Platform](https://github.com/Michal-10/Learning-Platform)
